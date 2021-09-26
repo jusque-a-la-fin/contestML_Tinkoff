@@ -430,6 +430,7 @@ def play(saved_size, saved_string_field_values, saved_number_of_bombs, new_game 
             continue
         clear_console()
 
+
 # Функция, управляющая сохраненными играми
 def saved_games(saved_string_field_values, saved_size, saved_number_of_bombs, saved_names):
 
@@ -514,6 +515,7 @@ def saved_games(saved_string_field_values, saved_size, saved_number_of_bombs, sa
 
                 if step == 3:
                     break
+
 
 # Главная функция
 def main():
