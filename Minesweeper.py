@@ -3,44 +3,44 @@ import random
 # для очищения консоли
 import os
 
-# Печать игрового поля
-def print_playing_field(string_field_values, n):
 
+# Печать игрового поля
+def print_playing_field(string_field_values, size):
     print()
     print("\t\t\t\tСАПЁР\n")
 
     el = "   "
-    for i in range(n):
+    for i in range(size):
         el = el + "     " + str(i + 1)
     print(el)
 
-    for row in range(n):
+    for row in range(size):
         el = "     "
         if row == 0:
-            for column in range(n):
+            for column in range(size):
                 el = el + "______"
             print(el)
 
         el = "     "
-        for column in range(n):
+        for column in range(size):
             el = el + "|     "
         print(el + "|")
 
         el = "  " + str(row + 1) + "  "
-        for column in range(n):
+        for column in range(size):
             el = el + "|  " + str(string_field_values[row][column]) + "  "
         print(el + "|")
 
         el = "     "
-        for col in range(n):
+        for col in range(size):
             el = el + "|_____"
         print(el + '|')
 
     print()
 
+
 # Функция, устанавливающая бомбы
 def lay_bombs(int_field_values, number_of_bombs, size):
-
     # счетчик установленных бомб
     counter = 0
     while counter < number_of_bombs:
@@ -57,11 +57,11 @@ def lay_bombs(int_field_values, number_of_bombs, size):
             counter = counter + 1
             int_field_values[row][column] = -1
 
+
 # Функция, устанавливающая в ячейку без бомбы число,
 # которое показывает, сколько бомб находится вокруг
 # данной ячейки
 def place_number_of_bombs(values, size):
-
     # Цикл по ячейкам поля
     for row in range(size):
         for column in range(size):
@@ -106,7 +106,6 @@ def place_number_of_bombs(values, size):
 # Рекурсивная функция, ищущая все нулевые ячейки,
 # соседние с нулевой ячейкой, которую выбрал игрок
 def find_zero_valued_cells(row, column, string_field_values, int_field_values, visited, size):
-
     # Если ячейка не посещена
     if [row, column] not in visited:
 
@@ -154,12 +153,11 @@ def display_main_menu():
     print("2. Сохраненные игры")
     print("3. Выход")
     print("Выберите, что хотите сделать")
-    print("Нажмите соответсвующую цифру, например 1 или 2 или 3: ", end = '')
+    print("Нажмите соответсвующую цифру, например 1 или 2 или 3: ", end='')
 
 
 # Функция, определяющая, нужно ли завершить игру
 def check_finish(string_field_values, size, number_of_bombs):
-
     # счетчик непустых ячеек
     count = 0
 
@@ -187,8 +185,7 @@ def show_bombs(string_field_values, int_field_values, n):
 
 
 # Функция, обрабатывающая ввод пользователя для игры
-def play(saved_size, saved_string_field_values, saved_number_of_bombs, new_game = True):
-
+def play(saved_size, saved_string_field_values, saved_number_of_bombs, new_game=True):
     print("\n\t\t\tИнструкция:")
     print("1. Введите координаты ячейки: Например, \"1 2 Open\"")
     print("2. Чтобы поставить флаг в ячейку, наберите её координаты: Например, \"1 2 Flag\"")
@@ -196,7 +193,7 @@ def play(saved_size, saved_string_field_values, saved_number_of_bombs, new_game 
     # Если новая игра запускается
     if new_game == True:
 
-        print("\nВыберите размер поля. Введите только одно натуральное число, например 5: ", end = '')
+        print("\nВыберите размер поля. Введите только одно натуральное число, например 5: ", end='')
 
         # Ввод размера игрового поля
         size = int(input())
@@ -208,11 +205,11 @@ def play(saved_size, saved_string_field_values, saved_number_of_bombs, new_game 
             print("Извините, размер поля не может быть отрицательным")
 
         # Ввод количества бомб
-        print("Выберите количество бомб. Введите только одно число, например 5: ", end = '')
+        print("Выберите количество бомб. Введите только одно число, например 5: ", end='')
         number_of_bombs = int(input())
 
         # Проверки на корректность количества бомб
-        if number_of_bombs > size**2:
+        if number_of_bombs > size ** 2:
             print("Ошибка! Количество бомб больше количества ячеек")
         elif number_of_bombs < 0:
             print("Ошибка! Количество бомб не может быть отрицательным числом")
@@ -221,7 +218,6 @@ def play(saved_size, saved_string_field_values, saved_number_of_bombs, new_game 
     else:
         size = saved_size
         number_of_bombs = saved_number_of_bombs
-
 
     # Значения ячеек в целочисленном формате
     int_field_values = [[0 for y in range(size)] for x in range(size)]
@@ -272,7 +268,6 @@ def play(saved_size, saved_string_field_values, saved_number_of_bombs, new_game 
                 else:
                     return -1
 
-
         firstIteration = True
 
         # Пользовательский ввод
@@ -309,7 +304,7 @@ def play(saved_size, saved_string_field_values, saved_number_of_bombs, new_game 
                 continue
 
             # Проверка на корректность вводимых чисел
-            if values_from_user[0] > size or values_from_user[0] < 1 or\
+            if values_from_user[0] > size or values_from_user[0] < 1 or \
                     values_from_user[1] > size or values_from_user[1] < 1:
                 # Очищаем консоль
                 clear_console()
@@ -362,7 +357,7 @@ def play(saved_size, saved_string_field_values, saved_number_of_bombs, new_game 
             continue
 
         # Проверка на корректность вводимых чисел
-        if values_from_user[0] > size or values_from_user[0] < 1 or\
+        if values_from_user[0] > size or values_from_user[0] < 1 or \
                 values_from_user[1] > size or values_from_user[1] < 1:
             clear_console()
             print("\nНеправильный ввод!")
@@ -432,96 +427,95 @@ def play(saved_size, saved_string_field_values, saved_number_of_bombs, new_game 
 
 # Функция, управляющая сохраненными играми
 def saved_games(saved_string_field_values, saved_size, saved_number_of_bombs, saved_names):
+    # если нет сохраненных игр
+    if (len(saved_names) == 0):
+        print("\nВы не сохранили ни одной игры\n")
+        return -1
 
-        # если нет сохраненных игр
-        if(len(saved_names) == 0):
-            print("\nВы не сохранили ни одной игры\n")
-            return -1
+    print("\tВы сохранили следующие игры")
+    for i in range(len(saved_names)):
+        print("{}. {}".format(i + 1, saved_names[i]))
+    print("\nВыберите, какую игру хотите продолжить")
+    print("Нажмите соответсвующую цифру, например 1 или 2 или 3: ", end='')
+    choice = int(input())
 
-        print("\tВы сохранили следующие игры")
-        for i in range(len(saved_names)):
-            print("{}. {}".format(i + 1, saved_names[i]))
-        print("\nВыберите, какую игру хотите продолжить")
-        print("Нажмите соответсвующую цифру, например 1 или 2 или 3: ", end='')
+    # пока пользователь не введет корректные данные
+    while (choice not in range(1, len(saved_names) + 1)):
+        print(range(len(saved_names)))
+        print("Вы нажали неверный номер!!")
+        print("Попробуйте еще раз")
         choice = int(input())
 
-        # пока пользователь не введет корректные данные
-        while(choice not in range(1,len(saved_names) + 1)):
-            print(range(len(saved_names)))
-            print("Вы нажали неверный номер!!")
-            print("Попробуйте еще раз")
-            choice = int(input())
+    # значения ячеек сохраненной игры строкового формата
+    saved_string_field_values1 = saved_string_field_values
 
-        # значения ячеек сохраненной игры строкового формата
-        saved_string_field_values1 = saved_string_field_values
+    # размер поля сохраненной игры
+    saved_size1 = saved_size
 
-        # размер поля сохраненной игры
-        saved_size1 = saved_size
+    # количество бомб сохраненной игры
+    saved_number_of_bombs1 = saved_number_of_bombs
 
-        # количество бомб сохраненной игры
-        saved_number_of_bombs1 = saved_number_of_bombs
+    # названия сохраненных игр
+    saved_names1 = saved_names
 
-        # названия сохраненных игр
-        saved_names1 = saved_names
+    # цикл, управляющий сохраненными играми
+    while True:
+        action = play(saved_size[choice - 1], saved_string_field_values[choice - 1], saved_number_of_bombs[choice - 1],
+                      False)
+        # игра не сохраняется
+        if action == -1:
+            return -1
+        # Игра сохраняется
+        else:
+            # показать главное меню
+            display_main_menu()
 
-        # цикл, управляющий сохраненными играми
-        while True:
-            action = play(saved_size[choice-1], saved_string_field_values[choice - 1], saved_number_of_bombs[choice - 1], False)
-            # игра не сохраняется
-            if action == -1:
-                return -1
-            # Игра сохраняется
-            else:
-                # показать главное меню
-                display_main_menu()
+            # получить выбор действия из главного меню
+            step = int(input())
+            if step == 1:
 
-                # получить выбор действия из главного меню
-                step = int(input())
-                if step == 1:
+                # запустить игру
+                action = play(saved_size, saved_string_field_values, saved_number_of_bombs)
 
-                    # запустить игру
-                    action = play(saved_size, saved_string_field_values, saved_number_of_bombs)
-
-                    # если пользователь решил не сохранять игру
-                    if action == -1:
-                        return -1
-
-                    # если пользователь решил сохранить игру
-                    else:
-                        # получить данные сохраненной игры
-
-                        m_v, n, s_m_n, name = action
-                        saved_string_field_values1.append(m_v)
-                        saved_size1.append(n)
-                        saved_number_of_bombs1.append(s_m_n)
-                        saved_names1.append(name)
+                # если пользователь решил не сохранять игру
+                if action == -1:
+                    return -1
 
                 # если пользователь решил сохранить игру
-                if step == 2:
-
+                else:
                     # получить данные сохраненной игры
+
                     m_v, n, s_m_n, name = action
                     saved_string_field_values1.append(m_v)
                     saved_size1.append(n)
                     saved_number_of_bombs1.append(s_m_n)
                     saved_names1.append(name)
 
-                    # запустить сохраненную игру
-                    action1 = saved_games(saved_string_field_values1, saved_size1, saved_number_of_bombs1, saved_names1)
-                    # если пользователь решил не сохранять игру
-                    if action1 == - 1:
-                        return -1
+            # если пользователь решил сохранить игру
+            if step == 2:
 
-                if step == 3:
-                    break
+                # получить данные сохраненной игры
+                m_v, n, s_m_n, name = action
+                saved_string_field_values1.append(m_v)
+                saved_size1.append(n)
+                saved_number_of_bombs1.append(s_m_n)
+                saved_names1.append(name)
+
+                # запустить сохраненную игру
+                action1 = saved_games(saved_string_field_values1, saved_size1, saved_number_of_bombs1, saved_names1)
+                # если пользователь решил не сохранять игру
+                if action1 == - 1:
+                    return -1
+
+            if step == 3:
+                break
 
 
 # Главная функция
 def main():
-
     # выбор пункта главного меню
     step = 0
-    
+
     # значения ячеек сохраненной игры строкового формата
     saved_string_field_values = []
 
@@ -555,7 +549,7 @@ def main():
             # игру решили сохранить
             else:
                 # получить данные сохраненной игры
-                m_v , n, s_m_n, name = action
+                m_v, n, s_m_n, name = action
                 saved_string_field_values.append(m_v)
                 saved_size.append(n)
                 saved_number_of_bombs.append(s_m_n)
@@ -573,6 +567,7 @@ def main():
         # выйти из игры
         if step == 3:
             break
+
 
 # Вызов главной функции
 main()
