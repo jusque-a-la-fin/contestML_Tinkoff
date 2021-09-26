@@ -1,4 +1,6 @@
+# для случайного расположения бомб
 import random
+# для очищения консоли
 import os
 
 # Печать игрового поля
@@ -43,7 +45,7 @@ def lay_bombs(int_field_values, number_of_bombs, size):
     counter = 0
     while counter < number_of_bombs:
 
-        # генерация позиции случайной ячейки
+        # генерация случайной позиции ячейки
         value = random.randint(0, size * size - 1)
 
         # получение столбца и строки из позиции
@@ -99,6 +101,7 @@ def place_number_of_bombs(values, size):
             # Проверяем нижнюю правую ячейку на наличие бомбы
             if row < size - 1 and column < size - 1 and values[row + 1][column + 1] == -1:
                 values[row][column] = values[row][column] + 1
+
 
 # Рекурсивная функция, ищущая все нулевые ячейки,
 # соседние с нулевой ячейкой, которую выбрал игрок
@@ -182,6 +185,7 @@ def show_bombs(string_field_values, int_field_values, n):
             if int_field_values[row][column] == -1:
                 string_field_values[row][column] = '*'
 
+
 # Функция, обрабатывающая ввод пользователя для игры
 def play(saved_size, saved_string_field_values, saved_number_of_bombs, new_game = True):
 
@@ -192,7 +196,7 @@ def play(saved_size, saved_string_field_values, saved_number_of_bombs, new_game 
     # Если новая игра запускается
     if new_game == True:
 
-        print("\nВыберите размер поля: ", end = '')
+        print("\nВыберите размер поля. Введите только одно натуральное число, например 5: ", end = '')
 
         # Ввод размера игрового поля
         size = int(input())
@@ -204,12 +208,14 @@ def play(saved_size, saved_string_field_values, saved_number_of_bombs, new_game 
             print("Извините, размер поля не может быть отрицательным")
 
         # Ввод количества бомб
-        print("Выберите количество бомб: ", end = '')
+        print("Выберите количество бомб. Введите только одно число, например 5: ", end = '')
         number_of_bombs = int(input())
 
         # Проверки на корректность количества бомб
         if number_of_bombs > size**2:
             print("Ошибка! Количество бомб больше количества ячеек")
+        elif number_of_bombs < 0:
+            print("Ошибка! Количество бомб не может быть отрицательным числом")
 
     # если запускается сохраненная игра
     else:
@@ -237,8 +243,6 @@ def play(saved_size, saved_string_field_values, saved_number_of_bombs, new_game 
 
     # Переменная, приводящая к выходу из цикла
     finish = False
-
-    # choice = 0
 
     # переменная, детектирующая первую итерацию цикла
     # позволяет предлагать после каждого хода
