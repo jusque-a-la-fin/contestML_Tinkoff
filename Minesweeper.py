@@ -158,21 +158,21 @@ def display_main_menu():
 
 
 # Функция, определяющая, нужно ли завершить игру
-def check_finish(string_field_values, n, number_of_bombs):
+def check_finish(string_field_values, size, number_of_bombs):
 
     # счетчик непустых ячеек
     count = 0
 
     # Цикл по всем ячейкам
-    for row in range(n):
-        for column in range(n):
+    for row in range(size):
+        for column in range(size):
 
             # если ячейка содержит флаг или непустая
             if string_field_values[row][column] != ' ' and string_field_values[row][column] != 'F':
                 count = count + 1
 
     # если открыты все ячейки без бомб
-    if count == n * n - number_of_bombs:
+    if count == size * size - number_of_bombs:
         return True
     else:
         return False
@@ -257,6 +257,7 @@ def play(saved_size, saved_string_field_values, saved_number_of_bombs, new_game 
         else:
             print_playing_field(string_field_values, size)
 
+            # Если выходим из игры
             print("Желаете покинуть партию?")
             print("Нажмите 1, если да. Нажмите любую другую клавишу, если нет")
             choice = input()
@@ -267,9 +268,7 @@ def play(saved_size, saved_string_field_values, saved_number_of_bombs, new_game 
                 if choice == '1':
                     print('Введите название сохраняемой игры, например: "игра1" ')
                     name = input()
-                    saved_string_field_values = string_field_values
-                    saved_size = size
-                    return saved_string_field_values, size, number_of_bombs, name
+                    return string_field_values, size, number_of_bombs, name
                 else:
                     return -1
 
@@ -277,7 +276,7 @@ def play(saved_size, saved_string_field_values, saved_number_of_bombs, new_game 
         firstIteration = True
 
         # Пользовательский ввод
-        input_from_user = input("Введите координаты ячейки через пробел = ").split()
+        input_from_user = input("Введите координаты ячейки, например \"1 2 Open\" или \"1 2 Flag\" ").split()
 
         # Проверка ввода, открывающего ячейку
         if len(input_from_user) == 3 and input_from_user[2] == "Open":
@@ -577,3 +576,4 @@ def main():
 
 # Вызов главной функции
 main()
+
